@@ -22,6 +22,8 @@ struct DateOfBirth {
     int Year;
     Months Month;
     int Day;
+
+    DateOfBirth(int year, Months month, int day) : Year(year), Month(month), Day(day) {}
 };
 
 class Person 
@@ -31,6 +33,8 @@ std::string FirstName;
 std::string LastName;
 DateOfBirth BirthDate;
 public:
+Person(const std::string& firstName, const std::string& lastName, DateOfBirth& birthday);
+
 int Age();
 
 

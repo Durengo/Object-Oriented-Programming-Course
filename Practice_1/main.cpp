@@ -1,7 +1,13 @@
 #include <iostream>
 
+#include "source/Person.h"
+
 int main(){
-    std::cout << "s\n";
+    DateOfBirth Birth(2000, Months::February, 20);
+
+    Person P("Name", "Surname", Birth);
+
+    std::cout << P.Age();
 
     return 0;
 }
