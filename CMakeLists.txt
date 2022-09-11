@@ -11,3 +11,9 @@ add_executable(Practice_1
         "${PROJECT_SOURCE_DIR}/Practice_1/main.cpp"
         ${P1}
         )
+
+add_subdirectory("${PROJECT_SOURCE_DIR}/vendor/fmt")
+include_directories("${PROJECT_SOURCE_DIR}/vendor/fmt/include")
+
+
+target_link_libraries(Practice_1 PRIVATE fmt::fmt)

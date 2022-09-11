@@ -1,20 +1,40 @@
 #include "Person.h"
 
-#include <iostream>
-#include <ctime>
+#include <fmt/core.h>
 
-Person::Person(const std::string& firstName, const std::string& lastName, DateOfBirth& birthday)
-: FirstName(firstName), LastName(lastName), BirthDate(birthday)
+Person::Person(const std::string &firstName, const std::string &lastName, DateMath::DateYMD &birthday)
+    : FirstName(firstName), LastName(lastName), BirthDate(birthday)
 {
-
+    CalculateAge();
 }
 
-int Person::Age()
+Person::Person(const std::string &firstName, const std::string &lastName, DateMath::DateYMD birthday)
+    : FirstName(firstName), LastName(lastName), BirthDate(birthday)
 {
-    time_t now = time(0);
-    char* dt = ctime(&now);
+    CalculateAge();
+}
 
-    std::cout << dt;
+std::string Person::GetName()
+{
+    return FirstName;
+}
 
-    return BirthDate.Year;
+std::string Person::GetSurname()
+{
+    return LastName;
+}
+
+int Person::GetAge()
+{
+    return CurrentAge;
+}
+
+void Person::CalculateAge()
+{
+    CurrentAge = DateMath::CalculateYears(BirthDate);
+}
+
+void Person::DaysTillBirthday()
+{
+    fmt::print("\nDays left until birthday: {0}\n", DateMath::DaysUntilDate(BirthDate));
 }

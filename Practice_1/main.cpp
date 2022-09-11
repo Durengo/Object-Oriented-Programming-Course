@@ -1,13 +1,9 @@
-#include <iostream>
+#include "source/Console.h"
 
-#include "source/Person.h"
+// https://calculat.io/en/date
 
-int main(){
-    DateOfBirth Birth(2000, Months::February, 20);
-
-    Person P("Name", "Surname", Birth);
-
-    std::cout << P.Age();
-
+int main()
+{
+    mainLoop();
     return 0;
 }
