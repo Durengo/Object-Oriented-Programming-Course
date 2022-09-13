@@ -15,5 +15,4 @@ add_executable(Practice_1
 add_subdirectory("${PROJECT_SOURCE_DIR}/vendor/fmt")
 include_directories("${PROJECT_SOURCE_DIR}/vendor/fmt/include")
 
-
-target_link_libraries(Practice_1 PRIVATE fmt::fmt)
+target_link_libraries(Practice_1 PUBLIC fmt::fmt)

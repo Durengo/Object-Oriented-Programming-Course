@@ -8,7 +8,7 @@
 
 void test()
 {
-    Person P("Seb", "Ter", {2000, DateMath::Months::December, 31});
+    Person P("Seb", "Ter", {2000, DateMath::Months::March, 23});
     P.DaysTillBirthday();
 }
 
@@ -25,7 +25,7 @@ void mainLoop()
     print("\nEnter Date of Birth");
     print("\nEnter Birth Year (1900-2022): ");
     year = GIBI(1900, 2022);
-
+    bool isLeap = DateMath::isLeapYear(year);
     print("\nEnter Birth Month (1-12): ");
     month = GIBI(1, 12);
     month--;
@@ -37,9 +37,18 @@ void mainLoop()
         day = GIBI(1, JANUARY);
         break;
     case 1:
-        print("\nFebruary {0}-{1}: ", 1, FEBRUARY);
-        day = GIBI(1, FEBRUARY);
-        break;
+        if (isLeap)
+        {
+            print("\nFebruary {0}-{1}: ", 1, FEBRUARY + 1);
+            day = GIBI(1, FEBRUARY + 1);
+            break;
+        }
+        else
+        {
+            print("\nFebruary {0}-{1}: ", 1, FEBRUARY);
+            day = GIBI(1, FEBRUARY);
+            break;
+        }
     case 2:
         print("\nMarch {0}-{1}: ", 1, MARCH);
         day = GIBI(1, MARCH);

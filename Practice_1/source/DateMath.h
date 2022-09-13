@@ -6,34 +6,18 @@
 namespace DateMath
 {
 
-#define JANUARY 31
-#define FEBRUARY 28
-#define MARCH 31
-#define APRIL 30
-#define MAY 31
-#define JUNE 30
-#define JULY 31
-#define AUGUST 31
-#define SEPTEMBER 30
-#define OCTOBER 31
-#define NOVEMBER 30
-#define DECEMBER 31
-
-    // enum MonthDays
-    // {
-    //     JANUARY = 31,
-    //     mutable FEBRUARY = 28,
-    //     MARCH = 31,
-    //     APRIL = 30,
-    //     MAY = 31,
-    //     JUNE = 30,
-    //     JULY = 31,
-    //     AUGUST = 31,
-    //     SEPTEMBER = 30,
-    //     OCTOBER = 31,
-    //     NOVEMBER = 30,
-    //     DECEMBER = 31,
-    // };
+    #define JANUARY 31
+    #define FEBRUARY 28
+    #define MARCH 31
+    #define APRIL 30
+    #define MAY 31
+    #define JUNE 30
+    #define JULY 31
+    #define AUGUST 31
+    #define SEPTEMBER 30
+    #define OCTOBER 31
+    #define NOVEMBER 30
+    #define DECEMBER 31
 
     enum Months
     {
@@ -65,23 +49,6 @@ namespace DateMath
         return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
     }
 
-    static void redefineYearDays(int year)
-    {
-        if (isLeapYear(year))
-        {
-            fmt::print("LEAP YEAR!\n");
-#define FEBRUARY 29
-            fmt::print("FEBRUARY = {0}\n", FEBRUARY);
-        }
-        else
-        {
-            fmt::print("NOT LEAP YEAR!\n");
-#define FEBRUARY 28
-            fmt::print("FEBRUARY = {0}\n", FEBRUARY);
-        }
-        return;
-    }
-
     static int CalculateYears(DateYMD Date)
     {
         std::time_t t = std::time(nullptr);
@@ -108,7 +75,10 @@ namespace DateMath
         std::time_t t = std::time(nullptr);
         std::tm *const localTime = std::localtime(&t);
         int totalDays = 0;
-        DateMath::redefineYearDays(localTime->tm_year +2);
+
+        int year = 1900 + localTime->tm_year;
+        bool isLeap = isLeapYear(year);
+        fmt::print("Y: {0}\n", year);
 
         if (Date.Month == localTime->tm_mon && Date.Day == localTime->tm_mday)
         {
@@ -134,6 +104,7 @@ namespace DateMath
                     totalDays += JANUARY;
                     break;
                 case 1:
+                    if(isLeap) totalDays++;
                     totalDays += FEBRUARY;
                     break;
                 case 2:
@@ -183,6 +154,7 @@ namespace DateMath
                 totalDays += JANUARY - localTime->tm_mday;
                 break;
             case 1:
+                if(isLeap) totalDays++;
                 totalDays += FEBRUARY - localTime->tm_mday;
                 break;
             case 2:
@@ -227,6 +199,7 @@ namespace DateMath
                     totalDays += JANUARY;
                     break;
                 case 1:
+                    if(isLeap) totalDays++;
                     totalDays += FEBRUARY;
                     break;
                 case 2:
@@ -277,6 +250,7 @@ namespace DateMath
                     totalDays += JANUARY;
                     break;
                 case 1:
+                    if(isLeap) totalDays++;
                     totalDays += FEBRUARY;
                     break;
                 case 2:
@@ -327,6 +301,7 @@ namespace DateMath
                 totalDays += JANUARY - localTime->tm_mday;
                 break;
             case 1:
+                if(isLeap) totalDays++;
                 totalDays += FEBRUARY - localTime->tm_mday;
                 break;
             case 2:
@@ -375,6 +350,7 @@ namespace DateMath
                     totalDays += JANUARY;
                     break;
                 case 1:
+                    if(isLeap) totalDays++;
                     totalDays += FEBRUARY;
                     break;
                 case 2:
