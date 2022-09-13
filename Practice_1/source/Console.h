@@ -2,6 +2,7 @@
 
 #include <string>
 
+void test();
 void mainLoop();
 
 int GIBI();

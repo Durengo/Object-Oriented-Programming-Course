@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ctime>
+#include <fmt/core.h>
 
 namespace DateMath
 {
@@ -18,21 +19,36 @@ namespace DateMath
 #define NOVEMBER 30
 #define DECEMBER 31
 
+    // enum MonthDays
+    // {
+    //     JANUARY = 31,
+    //     mutable FEBRUARY = 28,
+    //     MARCH = 31,
+    //     APRIL = 30,
+    //     MAY = 31,
+    //     JUNE = 30,
+    //     JULY = 31,
+    //     AUGUST = 31,
+    //     SEPTEMBER = 30,
+    //     OCTOBER = 31,
+    //     NOVEMBER = 30,
+    //     DECEMBER = 31,
+    // };
+
     enum Months
     {
-        None = 0,
-        January = 1,
-        February = 2,
-        March = 3,
-        April = 4,
-        May = 5,
-        June = 6,
-        July = 7,
-        August = 8,
-        September = 9,
-        October = 10,
-        November = 11,
-        December = 12
+        January = 0,
+        February = 1,
+        March = 2,
+        April = 3,
+        May = 4,
+        June = 5,
+        July = 6,
+        August = 7,
+        September = 8,
+        October = 9,
+        November = 10,
+        December = 11
     };
 
     struct DateYMD
@@ -43,6 +59,28 @@ namespace DateMath
 
         DateYMD(int year, Months month, int day) : Year(year), Month(month), Day(day) {}
     };
+
+    static bool isLeapYear(int year)
+    {
+        return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
+    }
+
+    static void redefineYearDays(int year)
+    {
+        if (isLeapYear(year))
+        {
+            fmt::print("LEAP YEAR!\n");
+#define FEBRUARY 29
+            fmt::print("FEBRUARY = {0}\n", FEBRUARY);
+        }
+        else
+        {
+            fmt::print("NOT LEAP YEAR!\n");
+#define FEBRUARY 28
+            fmt::print("FEBRUARY = {0}\n", FEBRUARY);
+        }
+        return;
+    }
 
     static int CalculateYears(DateYMD Date)
     {
@@ -70,17 +108,18 @@ namespace DateMath
         std::time_t t = std::time(nullptr);
         std::tm *const localTime = std::localtime(&t);
         int totalDays = 0;
+        DateMath::redefineYearDays(localTime->tm_year +2);
 
-        if (Date.Month == localTime->tm_mon + 1 && Date.Day == localTime->tm_mday)
+        if (Date.Month == localTime->tm_mon && Date.Day == localTime->tm_mday)
         {
             return totalDays;
         }
-        if (Date.Month == localTime->tm_mon + 1 && Date.Day > localTime->tm_mday)
+        if (Date.Month == localTime->tm_mon && Date.Day > localTime->tm_mday)
         {
             totalDays = Date.Day - localTime->tm_mday;
             return totalDays;
         }
-        if (Date.Month == localTime->tm_mon + 1 && Date.Day < localTime->tm_mday)
+        if (Date.Month == localTime->tm_mon && Date.Day < localTime->tm_mday)
         {
             int icount = 0;
             for (int i = localTime->tm_mon; icount != 12; i++)
@@ -135,8 +174,9 @@ namespace DateMath
             totalDays += Date.Day - localTime->tm_mday;
             return totalDays;
         }
-        if (Date.Month < localTime->tm_mon + 1)
+        if (Date.Month < localTime->tm_mon)
         {
+            fmt::print("{0}\n", totalDays);
             switch (localTime->tm_mon)
             {
             case 0:
@@ -178,6 +218,7 @@ namespace DateMath
             default:
                 break;
             }
+            fmt::print("{0}\n", totalDays);
             for (int i = localTime->tm_mon + 1; i != 12; i++)
             {
                 switch (i)
@@ -222,7 +263,8 @@ namespace DateMath
                     break;
                 }
             }
-            int icount = 1;
+            fmt::print("{0}\n", totalDays);
+            int icount = 0;
             for (int i = 0; icount != Date.Month; i++)
             {
                 if (i == 12)
@@ -272,10 +314,12 @@ namespace DateMath
                 }
                 icount++;
             }
+            fmt::print("{0}\n", totalDays);
             totalDays += Date.Day;
+            fmt::print("{0}\n", totalDays);
             return totalDays;
         }
-        if (Date.Month > localTime->tm_mon + 1)
+        if (Date.Month > localTime->tm_mon)
         {
             switch (localTime->tm_mon)
             {
@@ -318,8 +362,8 @@ namespace DateMath
             default:
                 break;
             }
-            int icount = 1;
-            for (int i = localTime->tm_mon + 1; i != Date.Month - 1; i++)
+            int icount = 0;
+            for (int i = localTime->tm_mon + 1; i != Date.Month; i++)
             {
                 if (i == 12)
                 {
@@ -372,5 +416,4 @@ namespace DateMath
             return totalDays;
         }
     }
-
 }
