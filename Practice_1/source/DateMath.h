@@ -1,7 +1,6 @@
 #pragma once
 
 #include <ctime>
-#include <fmt/core.h>
 
 namespace DateMath
 {
@@ -78,7 +77,6 @@ namespace DateMath
 
         int year = 1900 + localTime->tm_year;
         bool isLeap = isLeapYear(year);
-        fmt::print("Y: {0}\n", year);
 
         if (Date.Month == localTime->tm_mon && Date.Day == localTime->tm_mday)
         {
@@ -147,7 +145,6 @@ namespace DateMath
         }
         if (Date.Month < localTime->tm_mon)
         {
-            fmt::print("{0}\n", totalDays);
             switch (localTime->tm_mon)
             {
             case 0:
@@ -190,7 +187,6 @@ namespace DateMath
             default:
                 break;
             }
-            fmt::print("{0}\n", totalDays);
             for (int i = localTime->tm_mon + 1; i != 12; i++)
             {
                 switch (i)
@@ -236,7 +232,6 @@ namespace DateMath
                     break;
                 }
             }
-            fmt::print("{0}\n", totalDays);
             int icount = 0;
             for (int i = 0; icount != Date.Month; i++)
             {
@@ -288,9 +283,7 @@ namespace DateMath
                 }
                 icount++;
             }
-            fmt::print("{0}\n", totalDays);
             totalDays += Date.Day;
-            fmt::print("{0}\n", totalDays);
             return totalDays;
         }
         if (Date.Month > localTime->tm_mon)
