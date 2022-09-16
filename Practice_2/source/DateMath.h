@@ -4,19 +4,21 @@
 
 namespace DateMath
 {
-
-    #define JANUARY 31
-    #define FEBRUARY 28
-    #define MARCH 31
-    #define APRIL 30
-    #define MAY 31
-    #define JUNE 30
-    #define JULY 31
-    #define AUGUST 31
-    #define SEPTEMBER 30
-    #define OCTOBER 31
-    #define NOVEMBER 30
-    #define DECEMBER 31
+    enum MonthDays
+    {
+        JANUARY = 31,
+        FEBRUARY = 28,
+        MARCH = 31,
+        APRIL = 30,
+        MAY = 31,
+        JUNE = 30,
+        JULY = 31,
+        AUGUST = 31,
+        SEPTEMBER = 30,
+        OCTOBER = 31,
+        NOVEMBER = 30,
+        DECEMBER = 31
+    };
 
     enum Months
     {
@@ -42,6 +44,27 @@ namespace DateMath
 
         DateYMD(int year, Months month, int day) : Year(year), Month(month), Day(day) {}
     };
+
+    static int getMaxYear()
+    {
+        std::time_t t = std::time(nullptr);
+        std::tm *const localTime = std::localtime(&t);
+        return 1900 + localTime->tm_year;
+    }
+
+    static int getMaxMonth()
+    {
+        std::time_t t = std::time(nullptr);
+        std::tm *const localTime = std::localtime(&t);
+        return (localTime->tm_mon + 1);
+    }
+
+    static int getMaxDay()
+    {
+        std::time_t t = std::time(nullptr);
+        std::tm *const localTime = std::localtime(&t);
+        return localTime->tm_mday;
+    }
 
     static bool isLeapYear(int year)
     {
@@ -99,41 +122,42 @@ namespace DateMath
                 switch (i)
                 {
                 case 0:
-                    totalDays += JANUARY;
+                    totalDays += MonthDays::JANUARY;
                     break;
                 case 1:
-                    if(isLeap) totalDays++;
-                    totalDays += FEBRUARY;
+                    if (isLeap)
+                        totalDays++;
+                    totalDays += MonthDays::FEBRUARY;
                     break;
                 case 2:
-                    totalDays += MARCH;
+                    totalDays += MonthDays::MARCH;
                     break;
                 case 3:
-                    totalDays += APRIL;
+                    totalDays += MonthDays::APRIL;
                     break;
                 case 4:
-                    totalDays += MAY;
+                    totalDays += MonthDays::MAY;
                     break;
                 case 5:
-                    totalDays += JUNE;
+                    totalDays += MonthDays::JUNE;
                     break;
                 case 6:
-                    totalDays += JULY;
+                    totalDays += MonthDays::JULY;
                     break;
                 case 7:
-                    totalDays += AUGUST;
+                    totalDays += MonthDays::AUGUST;
                     break;
                 case 8:
-                    totalDays += SEPTEMBER;
+                    totalDays += MonthDays::SEPTEMBER;
                     break;
                 case 9:
-                    totalDays += OCTOBER;
+                    totalDays += MonthDays::OCTOBER;
                     break;
                 case 10:
-                    totalDays += NOVEMBER;
+                    totalDays += MonthDays::NOVEMBER;
                     break;
                 case 11:
-                    totalDays += DECEMBER;
+                    totalDays += MonthDays::DECEMBER;
                     break;
                 default:
                     break;
@@ -148,41 +172,42 @@ namespace DateMath
             switch (localTime->tm_mon)
             {
             case 0:
-                totalDays += JANUARY - localTime->tm_mday;
+                totalDays += MonthDays::JANUARY - localTime->tm_mday;
                 break;
             case 1:
-                if(isLeap) totalDays++;
-                totalDays += FEBRUARY - localTime->tm_mday;
+                if (isLeap)
+                    totalDays++;
+                totalDays += MonthDays::FEBRUARY - localTime->tm_mday;
                 break;
             case 2:
-                totalDays += MARCH - localTime->tm_mday;
+                totalDays += MonthDays::MARCH - localTime->tm_mday;
                 break;
             case 3:
-                totalDays += APRIL - localTime->tm_mday;
+                totalDays += MonthDays::APRIL - localTime->tm_mday;
                 break;
             case 4:
-                totalDays += MAY - localTime->tm_mday;
+                totalDays += MonthDays::MAY - localTime->tm_mday;
                 break;
             case 5:
-                totalDays += JUNE - localTime->tm_mday;
+                totalDays += MonthDays::JUNE - localTime->tm_mday;
                 break;
             case 6:
-                totalDays += JULY - localTime->tm_mday;
+                totalDays += MonthDays::JULY - localTime->tm_mday;
                 break;
             case 7:
-                totalDays += AUGUST - localTime->tm_mday;
+                totalDays += MonthDays::AUGUST - localTime->tm_mday;
                 break;
             case 8:
-                totalDays += SEPTEMBER - localTime->tm_mday;
+                totalDays += MonthDays::SEPTEMBER - localTime->tm_mday;
                 break;
             case 9:
-                totalDays += OCTOBER - localTime->tm_mday;
+                totalDays += MonthDays::OCTOBER - localTime->tm_mday;
                 break;
             case 10:
-                totalDays += NOVEMBER - localTime->tm_mday;
+                totalDays += MonthDays::NOVEMBER - localTime->tm_mday;
                 break;
             case 11:
-                totalDays += DECEMBER - localTime->tm_mday;
+                totalDays += MonthDays::DECEMBER - localTime->tm_mday;
                 break;
             default:
                 break;
@@ -192,41 +217,42 @@ namespace DateMath
                 switch (i)
                 {
                 case 0:
-                    totalDays += JANUARY;
+                    totalDays += MonthDays::JANUARY;
                     break;
                 case 1:
-                    if(isLeap) totalDays++;
-                    totalDays += FEBRUARY;
+                    if (isLeap)
+                        totalDays++;
+                    totalDays += MonthDays::FEBRUARY;
                     break;
                 case 2:
-                    totalDays += MARCH;
+                    totalDays += MonthDays::MARCH;
                     break;
                 case 3:
-                    totalDays += APRIL;
+                    totalDays += MonthDays::APRIL;
                     break;
                 case 4:
-                    totalDays += MAY;
+                    totalDays += MonthDays::MAY;
                     break;
                 case 5:
-                    totalDays += JUNE;
+                    totalDays += MonthDays::JUNE;
                     break;
                 case 6:
-                    totalDays += JULY;
+                    totalDays += MonthDays::JULY;
                     break;
                 case 7:
-                    totalDays += AUGUST;
+                    totalDays += MonthDays::AUGUST;
                     break;
                 case 8:
-                    totalDays += SEPTEMBER;
+                    totalDays += MonthDays::SEPTEMBER;
                     break;
                 case 9:
-                    totalDays += OCTOBER;
+                    totalDays += MonthDays::OCTOBER;
                     break;
                 case 10:
-                    totalDays += NOVEMBER;
+                    totalDays += MonthDays::NOVEMBER;
                     break;
                 case 11:
-                    totalDays += DECEMBER;
+                    totalDays += MonthDays::DECEMBER;
                     break;
                 default:
                     break;
@@ -242,41 +268,42 @@ namespace DateMath
                 switch (i)
                 {
                 case 0:
-                    totalDays += JANUARY;
+                    totalDays += MonthDays::JANUARY;
                     break;
                 case 1:
-                    if(isLeap) totalDays++;
-                    totalDays += FEBRUARY;
+                    if (isLeap)
+                        totalDays++;
+                    totalDays += MonthDays::FEBRUARY;
                     break;
                 case 2:
-                    totalDays += MARCH;
+                    totalDays += MonthDays::MARCH;
                     break;
                 case 3:
-                    totalDays += APRIL;
+                    totalDays += MonthDays::APRIL;
                     break;
                 case 4:
-                    totalDays += MAY;
+                    totalDays += MonthDays::MAY;
                     break;
                 case 5:
-                    totalDays += JUNE;
+                    totalDays += MonthDays::JUNE;
                     break;
                 case 6:
-                    totalDays += JULY;
+                    totalDays += MonthDays::JULY;
                     break;
                 case 7:
-                    totalDays += AUGUST;
+                    totalDays += MonthDays::AUGUST;
                     break;
                 case 8:
-                    totalDays += SEPTEMBER;
+                    totalDays += MonthDays::SEPTEMBER;
                     break;
                 case 9:
-                    totalDays += OCTOBER;
+                    totalDays += MonthDays::OCTOBER;
                     break;
                 case 10:
-                    totalDays += NOVEMBER;
+                    totalDays += MonthDays::NOVEMBER;
                     break;
                 case 11:
-                    totalDays += DECEMBER;
+                    totalDays += MonthDays::DECEMBER;
                     break;
                 default:
                     break;
@@ -291,41 +318,42 @@ namespace DateMath
             switch (localTime->tm_mon)
             {
             case 0:
-                totalDays += JANUARY - localTime->tm_mday;
+                totalDays += MonthDays::JANUARY - localTime->tm_mday;
                 break;
             case 1:
-                if(isLeap) totalDays++;
-                totalDays += FEBRUARY - localTime->tm_mday;
+                if (isLeap)
+                    totalDays++;
+                totalDays += MonthDays::FEBRUARY - localTime->tm_mday;
                 break;
             case 2:
-                totalDays += MARCH - localTime->tm_mday;
+                totalDays += MonthDays::MARCH - localTime->tm_mday;
                 break;
             case 3:
-                totalDays += APRIL - localTime->tm_mday;
+                totalDays += MonthDays::APRIL - localTime->tm_mday;
                 break;
             case 4:
-                totalDays += MAY - localTime->tm_mday;
+                totalDays += MonthDays::MAY - localTime->tm_mday;
                 break;
             case 5:
-                totalDays += JUNE - localTime->tm_mday;
+                totalDays += MonthDays::JUNE - localTime->tm_mday;
                 break;
             case 6:
-                totalDays += JULY - localTime->tm_mday;
+                totalDays += MonthDays::JULY - localTime->tm_mday;
                 break;
             case 7:
-                totalDays += AUGUST - localTime->tm_mday;
+                totalDays += MonthDays::AUGUST - localTime->tm_mday;
                 break;
             case 8:
-                totalDays += SEPTEMBER - localTime->tm_mday;
+                totalDays += MonthDays::SEPTEMBER - localTime->tm_mday;
                 break;
             case 9:
-                totalDays += OCTOBER - localTime->tm_mday;
+                totalDays += MonthDays::OCTOBER - localTime->tm_mday;
                 break;
             case 10:
-                totalDays += NOVEMBER - localTime->tm_mday;
+                totalDays += MonthDays::NOVEMBER - localTime->tm_mday;
                 break;
             case 11:
-                totalDays += DECEMBER - localTime->tm_mday;
+                totalDays += MonthDays::DECEMBER - localTime->tm_mday;
                 break;
             default:
                 break;
@@ -340,41 +368,42 @@ namespace DateMath
                 switch (i)
                 {
                 case 0:
-                    totalDays += JANUARY;
+                    totalDays += MonthDays::JANUARY;
                     break;
                 case 1:
-                    if(isLeap) totalDays++;
-                    totalDays += FEBRUARY;
+                    if (isLeap)
+                        totalDays++;
+                    totalDays += MonthDays::FEBRUARY;
                     break;
                 case 2:
-                    totalDays += MARCH;
+                    totalDays += MonthDays::MARCH;
                     break;
                 case 3:
-                    totalDays += APRIL;
+                    totalDays += MonthDays::APRIL;
                     break;
                 case 4:
-                    totalDays += MAY;
+                    totalDays += MonthDays::MAY;
                     break;
                 case 5:
-                    totalDays += JUNE;
+                    totalDays += MonthDays::JUNE;
                     break;
                 case 6:
-                    totalDays += JULY;
+                    totalDays += MonthDays::JULY;
                     break;
                 case 7:
-                    totalDays += AUGUST;
+                    totalDays += MonthDays::AUGUST;
                     break;
                 case 8:
-                    totalDays += SEPTEMBER;
+                    totalDays += MonthDays::SEPTEMBER;
                     break;
                 case 9:
-                    totalDays += OCTOBER;
+                    totalDays += MonthDays::OCTOBER;
                     break;
                 case 10:
-                    totalDays += NOVEMBER;
+                    totalDays += MonthDays::NOVEMBER;
                     break;
                 case 11:
-                    totalDays += DECEMBER;
+                    totalDays += MonthDays::DECEMBER;
                     break;
                 default:
                     break;

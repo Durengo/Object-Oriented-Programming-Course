@@ -1,9 +1,8 @@
 #include "Console.h"
-
-#include <iostream>
+#include "Input.h"
 #include "Person.h"
-#include <fmt/core.h>
 
+#include <fmt/core.h>
 #define print fmt::print
 
 void test()
@@ -17,82 +16,267 @@ void mainLoop()
     std::string name = "";
     std::string surname = "";
     int year = 0, month = 0, day = 0;
+    int currentYear = DateMath::getMaxYear();
 
     print("\nEnter name: ");
-    std::cin >> name;
+    // std::cin >> name;
+    name = GIBS_NW();
     print("\nEnter surname: ");
-    std::cin >> surname;
+    surname = GIBS_NW();
     print("\nEnter Date of Birth");
-    print("\nEnter Birth Year (1900-2022): ");
-    year = GIBI(1900, 2022);
+    print("\nEnter Birth Year ({0}-{1}): ", currentYear - 110, currentYear);
+    year = GIBI(1900, currentYear);
     bool isLeap = DateMath::isLeapYear(year);
-    print("\nEnter Birth Month (1-12): ");
-    month = GIBI(1, 12);
-    month--;
-    print("\nEnter Birth Day (1-31): ");
-    switch (month)
+    if (year == currentYear)
     {
-    case 0:
-        print("\nJanuary {0}-{1}: ", 1, JANUARY);
-        day = GIBI(1, JANUARY);
-        break;
-    case 1:
-        if (isLeap)
+        int currentMonth = DateMath::getMaxMonth();
+        int currentDays = DateMath::getMaxDay();
+        print("\nEnter Birth Month (1-{0}): ", currentMonth);
+        month = GIBI(1, currentMonth);
+        month--;
+        switch (month)
         {
-            print("\nFebruary {0}-{1}: ", 1, FEBRUARY + 1);
-            day = GIBI(1, FEBRUARY + 1);
-            break;
+        case 0:
+            if (month + 1 == currentMonth)
+            {
+                print("\nJanuary {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nJanuary {0}-{1}: ", 1, DateMath::MonthDays::JANUARY);
+                day = GIBI(1, DateMath::MonthDays::JANUARY);
+                break;
+            }
+        case 1:
+            if (month + 1 == currentMonth)
+            {
+                print("\nFebruary {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nFebruary {0}-{1}: ", 1, DateMath::MonthDays::FEBRUARY);
+                day = GIBI(1, DateMath::MonthDays::FEBRUARY);
+                break;
+            }
+        case 2:
+            if (month + 1 == currentMonth)
+            {
+                print("\nMarch {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nMarch {0}-{1}: ", 1, DateMath::MonthDays::MARCH);
+                day = GIBI(1, DateMath::MonthDays::MARCH);
+                break;
+            }
+        case 3:
+            if (month + 1 == currentMonth)
+            {
+                print("\nApril {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nApril {0}-{1}: ", 1, DateMath::MonthDays::APRIL);
+                day = GIBI(1, DateMath::MonthDays::APRIL);
+                break;
+            }
+
+        case 4:
+            if (month + 1 == currentMonth)
+            {
+                print("\nMay {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nMay {0}-{1}: ", 1, DateMath::MonthDays::MAY);
+                day = GIBI(1, DateMath::MonthDays::MAY);
+                break;
+            }
+
+        case 5:
+            if (month + 1 == currentMonth)
+            {
+                print("\nJune {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nJune {0}-{1}: ", 1, DateMath::MonthDays::JUNE);
+                day = GIBI(1, DateMath::MonthDays::JUNE);
+                break;
+            }
+
+        case 6:
+            if (month + 1 == currentMonth)
+            {
+                print("\nJuly {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nJuly {0}-{1}: ", 1, DateMath::MonthDays::JULY);
+                day = GIBI(1, DateMath::MonthDays::JULY);
+                break;
+            }
+
+        case 7:
+            if (month + 1 == currentMonth)
+            {
+                print("\nAugust {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nAugust {0}-{1}: ", 1, DateMath::MonthDays::AUGUST);
+                day = GIBI(1, DateMath::MonthDays::AUGUST);
+                break;
+            }
+
+        case 8:
+            if (month + 1 == currentMonth)
+            {
+                print("\nSeptember {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nSeptember {0}-{1}: ", 1, DateMath::MonthDays::SEPTEMBER);
+                day = GIBI(1, DateMath::MonthDays::SEPTEMBER);
+                break;
+            }
+
+        case 9:
+            if (month + 1 == currentMonth)
+            {
+                print("\nOctober {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nOctober {0}-{1}: ", 1, DateMath::MonthDays::OCTOBER);
+                day = GIBI(1, DateMath::MonthDays::OCTOBER);
+                break;
+            }
+
+        case 10:
+            if (month + 1 == currentMonth)
+            {
+                print("\nNovember {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nNovember {0}-{1}: ", 1, DateMath::MonthDays::NOVEMBER);
+                day = GIBI(1, DateMath::MonthDays::NOVEMBER);
+                break;
+            }
+
+        case 11:
+            if (month + 1 == currentMonth)
+            {
+                print("\nDecember {0}-{1}: ", 1, currentDays);
+                day = GIBI(1, currentDays);
+                break;
+            }
+            else
+            {
+                print("\nDecember {0}-{1}: ", 1, DateMath::MonthDays::DECEMBER);
+                day = GIBI(1, DateMath::MonthDays::DECEMBER);
+                break;
+            }
+
+        default:
+            print("\nEXCEPTION!\n");
+            return;
         }
-        else
-        {
-            print("\nFebruary {0}-{1}: ", 1, FEBRUARY);
-            day = GIBI(1, FEBRUARY);
-            break;
-        }
-    case 2:
-        print("\nMarch {0}-{1}: ", 1, MARCH);
-        day = GIBI(1, MARCH);
-        break;
-    case 3:
-        print("\nApril {0}-{1}: ", 1, APRIL);
-        day = GIBI(1, APRIL);
-        break;
-    case 4:
-        print("\nMay {0}-{1}: ", 1, MAY);
-        day = GIBI(1, MAY);
-        break;
-    case 5:
-        print("\nJune {0}-{1}: ", 1, JUNE);
-        day = GIBI(1, JUNE);
-        break;
-    case 6:
-        print("\nJuly {0}-{1}: ", 1, JULY);
-        day = GIBI(1, JULY);
-        break;
-    case 7:
-        print("\nAugust {0}-{1}: ", 1, AUGUST);
-        day = GIBI(1, AUGUST);
-        break;
-    case 8:
-        print("\nSeptember {0}-{1}: ", 1, SEPTEMBER);
-        day = GIBI(1, SEPTEMBER);
-        break;
-    case 9:
-        print("\nOctober {0}-{1}: ", 1, OCTOBER);
-        day = GIBI(1, OCTOBER);
-        break;
-    case 10:
-        print("\nNovember {0}-{1}: ", 1, NOVEMBER);
-        day = GIBI(1, NOVEMBER);
-        break;
-    case 11:
-        print("\nDecember {0}-{1}: ", 1, DECEMBER);
-        day = GIBI(1, DECEMBER);
-        break;
-    default:
-        print("\nEXCEPTION!\n");
-        return;
     }
+    else
+    {
+        print("\nEnter Birth Month (1-12): ");
+        month = GIBI(1, 12);
+        month--;
+        print("\nEnter Birth Day (1-31): ");
+        switch (month)
+        {
+        case 0:
+            print("\nJanuary {0}-{1}: ", 1, DateMath::MonthDays::JANUARY);
+            day = GIBI(1, DateMath::MonthDays::JANUARY);
+            break;
+        case 1:
+            if (isLeap)
+            {
+                print("\nFebruary {0}-{1}: ", 1, DateMath::MonthDays::FEBRUARY + 1);
+                day = GIBI(1, DateMath::MonthDays::FEBRUARY + 1);
+                break;
+            }
+            else
+            {
+                print("\nFebruary {0}-{1}: ", 1, DateMath::MonthDays::FEBRUARY);
+                day = GIBI(1, DateMath::MonthDays::FEBRUARY);
+                break;
+            }
+        case 2:
+            print("\nMarch {0}-{1}: ", 1, DateMath::MonthDays::MARCH);
+            day = GIBI(1, DateMath::MonthDays::MARCH);
+            break;
+        case 3:
+            print("\nApril {0}-{1}: ", 1, DateMath::MonthDays::APRIL);
+            day = GIBI(1, DateMath::MonthDays::APRIL);
+            break;
+        case 4:
+            print("\nMay {0}-{1}: ", 1, DateMath::MonthDays::MAY);
+            day = GIBI(1, DateMath::MonthDays::MAY);
+            break;
+        case 5:
+            print("\nJune {0}-{1}: ", 1, DateMath::MonthDays::JUNE);
+            day = GIBI(1, DateMath::MonthDays::JUNE);
+            break;
+        case 6:
+            print("\nJuly {0}-{1}: ", 1, DateMath::MonthDays::JULY);
+            day = GIBI(1, DateMath::MonthDays::JULY);
+            break;
+        case 7:
+            print("\nAugust {0}-{1}: ", 1, DateMath::MonthDays::AUGUST);
+            day = GIBI(1, DateMath::MonthDays::AUGUST);
+            break;
+        case 8:
+            print("\nSeptember {0}-{1}: ", 1, DateMath::MonthDays::SEPTEMBER);
+            day = GIBI(1, DateMath::MonthDays::SEPTEMBER);
+            break;
+        case 9:
+            print("\nOctober {0}-{1}: ", 1, DateMath::MonthDays::OCTOBER);
+            day = GIBI(1, DateMath::MonthDays::OCTOBER);
+            break;
+        case 10:
+            print("\nNovember {0}-{1}: ", 1, DateMath::MonthDays::NOVEMBER);
+            day = GIBI(1, DateMath::MonthDays::NOVEMBER);
+            break;
+        case 11:
+            print("\nDecember {0}-{1}: ", 1, DateMath::MonthDays::DECEMBER);
+            day = GIBI(1, DateMath::MonthDays::DECEMBER);
+            break;
+        default:
+            print("\nEXCEPTION!\n");
+            return;
+        }
+    }
+
     Person P(name, surname, {year, static_cast<DateMath::Months>(month), day});
 
     while (true)
@@ -130,120 +314,5 @@ void mainLoop()
             break;
         }
     }
-
-    std::cout << P.GetAge() << "\n";
-    P.DaysTillBirthday();
-
-    GIBI(1, 3);
 }
 
-int GIBI()
-{
-    std::string input;
-    int converted;
-    while (true)
-    {
-        std::cin >> input;
-        try
-        {
-            converted = std::stoi(input);
-            break;
-        }
-        catch (std::invalid_argument &i)
-        {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI INVALID ARGUMENT!: ", input, "\n");
-        }
-        catch (std::out_of_range &i)
-        {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI OUT OF RANGE!: ", input, "\n");
-        }
-    }
-    return converted;
-}
-
-int GIBI(int min, int max)
-{
-    while (true)
-    {
-        int input = GIBI();
-        if (input >= min && input <= max)
-        {
-            return input;
-        }
-        else
-        {
-            print("!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !OUT OF RANGE INPUT: ", input, " in", min, " ", max);
-        }
-    }
-}
-
-double GIBD()
-{
-    std::string input;
-    double converted;
-    while (true)
-    {
-        std::cin >> input;
-        try
-        {
-            converted = std::stod(input);
-            break;
-        }
-        catch (std::invalid_argument &i)
-        {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI INVALID ARGUMENT!: ", input, "\n");
-        }
-        catch (std::out_of_range &i)
-        {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI OUT OF RANGE!: ", input, "\n");
-        }
-    }
-    return converted;
-}
-
-std::string GIBS()
-{
-    std::string input;
-    std::cin >> input;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    return input;
-}
-
-std::string GIBSWW()
-{
-    std::string input;
-    std::getline(std::cin >> std::ws, input);
-    return input;
-}
-
-int Get_Input_Yes_Or_No()
-{
-    while (true)
-    {
-        print("Answer with: (1) Yes; (0) No.\n");
-        int input = GIBI(0, 1);
-
-        switch (input)
-        {
-        case 0:
-            print("\nNo selected!\n");
-            return input;
-        case 1:
-            print("\nYes selected!\n");
-            return input;
-        default:
-            print("\n!EXCEPTION!\n");
-            break;
-        }
-    }
-}
