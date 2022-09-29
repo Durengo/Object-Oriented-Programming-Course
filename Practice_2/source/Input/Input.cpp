@@ -1,11 +1,7 @@
 #include "Input.h"
+#include "PCH.h"
 
-#include <iostream>
-#include <string_view>
-#include <algorithm>
-
-#include <fmt/core.h>
-#define print fmt::print
+#include "Core/Log.h"
 
 int GIBI()
 {
@@ -21,15 +17,13 @@ int GIBI()
         }
         catch (std::invalid_argument &i)
         {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI INVALID ARGUMENT!: ", input, "\n");
+            CLI_ERROR("{0}", i.what());
+            CLI_ERROR("EXCEPTION! NOT AN INTEGER NUMBER: {0}\nTry again:", input);
         }
         catch (std::out_of_range &i)
         {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI OUT OF RANGE!: ", input, "\n");
+            CLI_ERROR("{0}", i.what());
+            CLI_ERROR("EXCEPTION! INPUT OUT OF RANGE: {0}\nTry again:", input);
         }
     }
     return converted;
@@ -46,8 +40,7 @@ int GIBI(int min, int max)
         }
         else
         {
-            print("!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !OUT OF RANGE INPUT: ", input, " in", min, " ", max);
+            CLI_ERROR("EXCEPTION! INPUT OUT OF RANGE: {0} in [MIN]{1}-[MAX]{2}\nTry again:", input, min, max);
         }
     }
 }
@@ -66,15 +59,13 @@ double GIBD()
         }
         catch (std::invalid_argument &i)
         {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI INVALID ARGUMENT!: ", input, "\n");
+            CLI_ERROR("{0}", i.what());
+            CLI_ERROR("EXCEPTION! NOT A DOUBLE NUMBER: {0}\nTry again:", input);
         }
         catch (std::out_of_range &i)
         {
-            print("{0}", i.what());
-            print("\n!EXCEPTION!\n");
-            print("\n!EXCEPTION!\n !STOI OUT OF RANGE!: ", input, "\n");
+            CLI_ERROR("{0}", i.what());
+            CLI_ERROR("EXCEPTION! INPUT OUT OF RANGE: {0}\nTry again:", input);
         }
     }
     return converted;
@@ -99,11 +90,10 @@ std::string GIBS_NW()
         valid = validateName(input);
         if (!valid)
         {
-            print("THIS DATA CANNOT HAVE:\n 1. MORE THAN ONE CAPITAL LETTER AND ONLY AT THE START;\n 2. ANY NUMBERS OR SYMBOLS;\n 3. WHITESPACE\nTry again: ");
+            CLI_ERROR("THIS DATA CANNOT HAVE:\n 1. MORE THAN ONE CAPITAL LETTER AND ONLY AT THE START;\n 2. ANY NUMBERS OR SYMBOLS;\n 3. WHITESPACE\nTry again: ");
         }
     } while (!valid);
     std::cin.clear();
-    // print("VALID = {0}\n", valid);
     return input;
 }
 
@@ -111,19 +101,19 @@ int Get_Input_Yes_Or_No()
 {
     while (true)
     {
-        print("Answer with: (1) Yes; (0) No.\n");
+        CLI_ERROR("Answer with: (1) Yes; (0) No.\n");
         int input = GIBI(0, 1);
 
         switch (input)
         {
         case 0:
-            print("\nNo selected!\n");
+            CLI_ERROR("\nNo selected!\n");
             return input;
         case 1:
-            print("\nYes selected!\n");
+            CLI_ERROR("\nYes selected!\n");
             return input;
         default:
-            print("\n!EXCEPTION!\n");
+            CLI_ERROR("\n!EXCEPTION!\n");
             break;
         }
     }
@@ -141,32 +131,38 @@ bool validateName(const std::string &name)
     }
 }
 
-bool isLetters(const std::string_view &name)
+bool isLetters(const std::string_view &text)
 {
-    return all_of(name.begin(), name.end(), [](char ch)
+    return all_of(text.begin(), text.end(), [](char ch)
                   { return (isalpha(ch)); });
 }
 
-bool oneCapital(const std::string &name)
+bool isNumbers(const std::string_view &text)
+{
+    return all_of(text.begin(), text.end(), [](char ch)
+                  { return (isdigit(ch)); });
+}
+
+bool oneCapital(const std::string &text)
 {
     int cCount = 0;
-    for (std::size_t i{}; i < name.length() && cCount < name.length(); i++)
+    for (std::size_t i{}; i < text.length() && cCount < text.length(); i++)
     {
-        // print("NAME[{0}] = {1}; UPPER[{0}] = {2}\n", i, name[i], toupper(name.c_str()[i]));
+        // CLI_ERROR("NAME[{0}] = {1}; UPPER[{0}] = {2}\n", i, name[i], toupper(name.c_str()[i]));
         switch (cCount)
         {
         case 0:
-            if (name[0] != toupper(name.c_str()[0]))
+            if (text[0] != toupper(text.c_str()[0]))
             {
-                print("FIRST LETTER IS NOT CAPITAL.\n");
+                CLI_ERROR("FIRST LETTER IS NOT CAPITAL.\n");
                 return false;
             }
             cCount++;
             break;
         default:
-            if (name[i] == toupper(name.c_str()[i]))
+            if (text[i] == toupper(text.c_str()[i]))
             {
-                print("MORE THAN ONE CAPITAL LETTER.\n");
+                CLI_ERROR("MORE THAN ONE CAPITAL LETTER.\n");
                 return false;
             }
             cCount++;

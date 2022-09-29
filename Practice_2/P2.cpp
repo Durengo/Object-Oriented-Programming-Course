@@ -1,24 +1,20 @@
-#include "source/Console.h"
+#include "Core/Log.h"
+#include "GUI/FLTK/API.h"
 
-#include <fmt/core.h>
+// TODO: ADD SUPPORT FOR UTF-8
+// TODO: REPLACE USER INPUT WITH DROP DOWN MENUS
+// TODO: ADD PADDING TO ALL LAYERS / BOX AREAS
+// TODO: ADD THREAD FOR MULTIPLE INPUT POLLING OR SIMPLY REMOVE CONSOLE FROM RELEASE
+// TODO: ADD COMMENTS
+// TODO: ADD README / DOCUMENTATION
 
-// https://calculat.io/en/date
+// FOR CHECKING DAYS UNTIL BIRTHDAY:
+// //https://calculat.io/en/date
 
-// int main()
-// {
-//   // test();
-//   mainLoop();
-
-//   return 0;
-// }
-
-#include "source/GUI/GTKAPI.h"
-#include <gtkmm/application.h>
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-  auto app = Gtk::Application::create("org.gtkmm.examples");
-  
+   CLI::Log::Init();
+   FLTKAPI::Init(635, 530, "Window");
 
-  return app->make_window_and_run<GTKAPI>(argc, argv);
+   return 0;
 }
